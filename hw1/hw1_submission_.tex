@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[letterpaper, margin=0.95in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{titleps}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newpagestyle{ruled}
+{\sethead{CMU 16-831}{Intro to Robot Learning}{Fall 2026}\headrule
+  \setfoot{}{}{}}
+\pagestyle{ruled}
+\renewcommand\makeheadrule{\color{black}\rule[-.75\baselineskip]{\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+    {\Large Assignment 1: Imitation Learning} \\
+    \vspace{.25cm}
+    \textbf{Andrew ID:} \texttt{qingyanm} \\
+    \textbf{Collaborators:} . \\
+\end{center}
+
+% \textit{Generative AI tools such as ChatGPT are viewed as collaborators in this course, acknowledge accordingly.}
+
+\section{Behavioral Cloning (10 pt)}
+
+\subsection{Part 2 (1.5 pt)}
+\begin{table}[!h]
+  \centering
+  \caption{Mean and standard deviation of expert return over two trajectories, for each environment.}
+  \begin{tabular}{cccccc}
+    \toprule
+    Metric/Env & Ant-v2 & Humanoid-v2 & Walker2d-v2 & Hopper-v2 & HalfCheetah-v2 \\
+    \midrule
+    Mean  & 4713.65 & 10344.52 & 5566.85 & 3772.67 &4205.78\\
+    Std.  & 12.20 & 20.98 & 9.24 & 1.95 & 83.04\\
+    \bottomrule
+  \end{tabular}
+  \label{tab:p2}
+\end{table}
+
+\subsection{Part 3 (5 pt)}
+\begin{table}[htbp]
+  \centering
+  \caption{BC vs.\ expert return on Ant-v2 and Humanoid-v2 (mean and standard deviation across trajectories). Both policies use two hidden layers of width 64, two expert trajectories totaling 2000 transitions, learning rate $5\times10^{-3}$, training batch size 100, and one BC iteration with 1000 gradient updates; seed 4. The maximum episode length is 1000 and the evaluation budget is 5000 environment steps, giving 5 Ant trajectories (5000 steps) and 74 Humanoid trajectories (5068 steps). Expert statistics use the two supplied demonstrations.}
+  \begin{tabular}{ccccc}
+    \toprule
+    Env   & \multicolumn{2}{c}{Ant-v2} & \multicolumn{2}{c}{Humanoid-v2} \\
+    \midrule
+    Metric & Mean  & Std.  & Mean  & Std. \\
+    Expert & 4713.65 & 12.20 & 10344.52 & 20.98 \\
+    BC    & 4466.13& 60.22 & 294.11 &  59.17 \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:p3}
+\end{table}
+
+
+\clearpage
+\subsection{Part 4 (3 pt)}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.78\columnwidth]{part4_learning_rate.png}
+  \caption{BC agent’s performance vs. the value of learning rate in the Humanoid-v2 environment. I hypothesized that, under a set of fixed training hyperparameters, an intermediate learning rate would outperform both very small and very large rates. The  learning rates tested are shown in the picture. Hyperparameters: All runs used the size of 64, 2 hidden layers, 2 expert trajectories totaling 2000 transitions, a training batch size of 100, and 1 BC iteration with 10000 gradient updates. The random seed was 4. }
+  \label{fig:p4}
+\end{figure}
+
+\subsection{Part 5 (0.5 pt)}
+Find one robotics paper from the last $\sim$3 years that uses imitation learning (i.e. behavior cloning) as the primary methodology. In a short paragraph (4-5 sentences): (i) cite it, (ii) say what robot task is being cloned and where the expert data comes from and (iii) name a main IL risk from this homework and whether that still applies to the paper's methodology. A few sentences is enough; this is not meant to be an extensive literature review.
+
+\textit{Write your paragraph here.}
+(i) Fu, Z., Zhao, T. Z., \& Finn, C. (2024, September). Mobile aloha: Learning bimanual mobile manipulation using low-cost whole-body teleoperation. In 8th Annual Conference on Robot Learning.
+(ii) In this work, the system was designed for imitating mobile manipulation tasks that are bimanual and require whole-body control. Specifically, the robot learns coordinated control of two arms and a mobile base. The expert data comes from human whole-body teleperation and existing static ALOHA demontrations.  
+(iii) Covariate Shift: action errors can lead the robot into states poorly represented in the expert data, leading to more errors subsequently. It still applies to the paper's methodology, since the expert dataset cannot cover the all possible states the robot can encounter.
+
+\clearpage
+\section{DAgger (5 pt)}
+
+\subsection{Part 2 (5 pt)}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=\columnwidth]{}
+  \caption{}
+  \label{fig:p5}
+\end{figure}
+
+
+\end{document}
