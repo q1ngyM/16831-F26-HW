@@ -24,6 +24,8 @@
     \textbf{Collaborators:} . \\
 \end{center}
 
+\textbf{Additional collaborator acknowledgment:} OpenAI ChatGPT/Codex assisted with extracting logged statistics, preparing figures (including image generation), and adding report details.
+
 % \textit{Generative AI tools such as ChatGPT are viewed as collaborators in this course, acknowledge accordingly.}
 
 \section{Behavioral Cloning (10 pt)}
@@ -46,7 +48,7 @@
 \subsection{Part 3 (5 pt)}
 \begin{table}[htbp]
   \centering
-  \caption{BC vs.\ expert return on Ant-v2 and Humanoid-v2 (mean and standard deviation across trajectories). Both policies use two hidden layers of width 64, two expert trajectories totaling 2000 transitions, learning rate $5\times10^{-3}$, training batch size 100, and one BC iteration with 1000 gradient updates; seed 4. The maximum episode length is 1000 and the evaluation budget is 5000 environment steps, giving 5 Ant trajectories (5000 steps) and 74 Humanoid trajectories (5068 steps). Expert statistics use the two supplied demonstrations.}
+  \caption{BC vs.\ expert return on Ant-v2 and Humanoid-v2 (mean and standard deviation across trajectories). Both policies use two hidden layers of width 64, two expert trajectories totaling 2000 transitions, learning rate $5\times10^{-3}$, training batch size 100, and one BC iteration with 1000 gradient updates; seed 4. The maximum episode length is 1000 and the evaluation budget is 5000 environment steps. Ant BC achieves 94.75\% of expert mean return, and Humanoid BC achieves 2.84\%.}
   \begin{tabular}{ccccc}
     \toprule
     Env   & \multicolumn{2}{c}{Ant-v2} & \multicolumn{2}{c}{Humanoid-v2} \\
@@ -65,7 +67,7 @@
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.78\columnwidth]{part4_learning_rate.png}
-  \caption{BC agent’s performance vs. the value of learning rate in the Humanoid-v2 environment. I hypothesized that, under a set of fixed training hyperparameters, an intermediate learning rate would outperform both very small and very large rates. The  learning rates tested are shown in the picture. Hyperparameters: All runs used the size of 64, 2 hidden layers, 2 expert trajectories totaling 2000 transitions, a training batch size of 100, and 1 BC iteration with 10000 gradient updates. The random seed was 4. }
+  \caption{BC agent’s performance vs. the value of learning rate in the Humanoid-v2 environment. I hypothesized that, under a set of fixed training hyperparameters, an intermediate learning rate would outperform both very small and very large rates. The  learning rates tested are shown in the picture. Hyperparameters: All runs used the size of 64, 2 hidden layers, 2 expert trajectories totaling 2000 transitions, a training batch size of 100, and 1 BC iteration with 10000 gradient updates. The random seed was 4. All six runs used 1000 gradient updates. Learning rates were $10^{-5}$, $10^{-4}$, $10^{-3}$, $5\times10^{-3}$, $10^{-2}$, and $5\times10^{-2}$. Each point shows mean return with $\pm1$ standard deviation over 198, 68, 106, 90, 116, and 103 evaluation rollouts, respectively; the evaluation budget was 5000 steps and the episode cap was 1000. The highest mean, $340.78\pm32.38$, occurs at $10^{-4}$, supporting the hypothesis.  }
   \label{fig:p4}
 \end{figure}
 
@@ -83,8 +85,8 @@ Find one robotics paper from the last $\sim$3 years that uses imitation learning
 \subsection{Part 2 (5 pt)}
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=\columnwidth]{}
-  \caption{}
+  \includegraphics[width=\columnwidth]{part2_dagger.png}
+  \caption{DAgger learning curves for Ant-v2 (left) and Humanoid-v2 (right), with mean return and $\pm1$ standard deviation across evaluation rollouts. Horizontal lines show the expert and Part 1.3 BC means. Ant uses 2 hidden layers of width 64 and learning rate $5\times10^{-3}$; Humanoid uses 3 hidden layers of width 64 and learning rate $10^{-4}$. Both runs use seed 4, batch size of 100, and 1000 gradient updates per iteration. Evaluation uses at least 5000 steps per iteration with an episode cap of 1000. Final returns are $4705.81\pm88.37$ and $608.67\pm227.17$, respectively. The Humanoid BC reference uses the Part 1.3 configuration (two hidden layers, learning rate $5\times10^{-3}$), so it differs from the initialization of this tuned DAgger run.}
   \label{fig:p5}
 \end{figure}
 
